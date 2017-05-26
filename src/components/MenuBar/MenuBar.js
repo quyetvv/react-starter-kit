@@ -16,15 +16,27 @@ import MenuItem from '../MenuItem';
 
 class MenuBar extends React.Component {
   static propTypes = {
-    pageMenus: PropTypes.array.isRequired,
-  };
+    pageMenus: PropTypes.array.isRequired
+  }
+
+  componentDidMount() {    
+    dispatchEvent('LOAD_MENUS');
+    fetch('https://reqres.in/api/users?page=2').then(function(data){
+      return data.json();            
+    }).then(function (r){
+      this.setState({
+        pageMenus: r.data
+      });
+    })
+  }
 
   render() {
     return (
-      <div className={s.root} role="MenuBar">
-        this.props.pageMenus.map(menuItem => 
-          <MenuItem {...menuItem}/>
-        );
+      <div className={s.root} role="MenuBar"> {
+        this.props.pageMenus.map(menuItem =>            
+            <MenuItem {...menuItem}/>
+        )
+      }
       </div>
     );
   }

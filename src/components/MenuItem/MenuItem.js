@@ -17,13 +17,14 @@ import Link from '../Link';
 class MenuItem extends React.Component {
   static propTypes = {
     to: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired,
+    text: PropTypes.string.isRequired,
+    children: PropTypes.node,
     onClick: PropTypes.func,
   };
 
   render() {
-    const { to, children, ...props } = this.props;
-    return <a href={to} {...props} onClick={this.handleClick}>{children}</a>;
+    const { to, children, text, ...props } = this.props;
+    return <a href={to} {...props} onClick={this.handleClick}>{text}</a>;
   }
 }
 
