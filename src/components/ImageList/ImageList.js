@@ -11,10 +11,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './MenuBar.css';
+import s from './ImageList.css';
 import MenuItem from '../MenuItem';
 
-class MenuBar extends React.Component {
+class ImageList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -28,7 +28,7 @@ class MenuBar extends React.Component {
 
   render() {
     return (
-      <div className={s.root} role="MenuBar"> 
+      <div className={s.root} role="ImageList"> 
         <ul>
           {
             this.props.pageMenus.map(menuItem =>
@@ -41,4 +41,4 @@ class MenuBar extends React.Component {
   }
 }
 
-export default withStyles(s)(MenuBar);
+export default withStyles(s)(ImageList);

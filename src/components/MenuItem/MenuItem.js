@@ -24,7 +24,7 @@ class MenuItem extends React.Component {
 
   render() {
     const { to, children, text, ...props } = this.props;
-    return <a href={to} {...props} onClick={this.handleClick}>{text}</a>;
+    return <li><a href={to} {...props} onClick={this.handleClick}>{text}</a></li>;
   }
 }
 
