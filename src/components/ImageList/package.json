@@ -1,6 +1,6 @@
 {
-  "name": "MenuBar",
+  "name": "ImageList",
   "version": "0.0.0",
   "private": true,
-  "main": "./MenuBar.js"
+  "main": "./ImageList.js"
 }
