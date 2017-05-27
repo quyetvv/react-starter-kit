@@ -20,22 +20,33 @@ class ImageList extends React.Component {
     this.state = {};
   }
 
-  static propTypes = {
-    pageMenus: PropTypes.array.isRequired
+  componentDidMount() {   
+    var thisCpn = this; 
+    //dispatchEvent('LOAD_MENUS');
+    fetch('https://reqres.in/api/users?page=2').then(data =>{
+      return data.json();            
+    }).then(r => {
+      thisCpn.setState({
+        pageMenus: r.data
+      });
+    });
   }
-
-  
 
   render() {
     return (
-      <div className={s.root} role="ImageList"> 
-        <ul>
-          {
-            this.props.pageMenus.map(menuItem =>
-              <MenuItem {...menuItem} />
-            )
-          }
-        </ul>
+      <div className={s.root} role="ImageList">
+        {
+          (this.state.pageMenus) &&
+          (
+            <ul>
+              {
+                this.state.pageMenus.map(item =>
+                  <img src={item.avatar} />
+                )
+              }
+            </ul>
+          )
+        }
       </div>
     );
   }
