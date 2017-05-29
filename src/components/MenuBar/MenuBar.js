@@ -13,6 +13,7 @@ import cx from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './MenuBar.css';
 import MenuItem from '../MenuItem';
+import PersonList from '../PersonList/PersonList'
 
 class MenuBar extends React.Component {
   constructor(props) {
@@ -36,7 +37,8 @@ class MenuBar extends React.Component {
             )
           }
         </ul>
-      </div>
+        <PersonList />
+      </div>      
     );
   }
 }

@@ -22,16 +22,19 @@ class PersonList extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {   
+  async componentDidMount() {   
     var thisCpn = this; 
+     const res = await fetch('https://reqres.in/api/users?page=2')
+  const r = await res.json()
+  this.setState({pageMenus: r.data})
     //dispatchEvent('LOAD_MENUS');
-    fetch('https://reqres.in/api/users?page=2').then(data =>{
-      return data.json();            
-    }).then(r => {
-      thisCpn.setState({
-        pageMenus: r.data
-      });
-    });
+    // fetch('https://reqres.in/api/users?page=2').then(data =>{
+    //   return data.json();            
+    // }).then(r => {
+    //   thisCpn.setState({
+    //     pageMenus: r.data
+    //   });
+    // });
   }
 
   render() {
@@ -43,7 +46,7 @@ class PersonList extends React.Component {
             <ul>
               {
                 this.state.pageMenus.map(item =>
-                  <img src={item.avatar} />
+                  <p>{item.first_name}</p>
                 )
               }
             </ul>
