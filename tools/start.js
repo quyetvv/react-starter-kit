@@ -18,6 +18,8 @@ import webpackConfig from './webpack.config';
 import run, { format } from './run';
 import clean from './clean';
 
+require('dotenv').config();
+
 const isDebug = !process.argv.includes('--release');
 
 // https://webpack.js.org/configuration/watch/#watchoptions

@@ -6,6 +6,11 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
+import {
+  GraphQLID as ID,
+  GraphQLString as StringType,
+  GraphQLNonNull as NonNull,
+} from 'graphql';
 
 import {
   GraphQLSchema as Schema,
@@ -15,16 +20,24 @@ import {
 import me from './queries/me';
 import news from './queries/news';
 import intl from './queries/intl';
+import adminsites from './queries/adminsite';
+import addSite from './queries/addsite';
 
 const schema = new Schema({
   query: new ObjectType({
-    name: 'Query',
+    name: 'QuerySuperDot',
     fields: {
       me,
       news,
       intl,
+      adminsites,
+    },
+  }),
+  mutation: new ObjectType({
+    name: 'Mutations',
+    fields: {
+      addSite,
     },
   }),
 });
-
 export default schema;
