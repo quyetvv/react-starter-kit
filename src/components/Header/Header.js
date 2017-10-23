@@ -45,6 +45,15 @@ const messages = defineMessages({
 });
 
 class Header extends React.Component {
+
+  uploadWidget() {
+    cloudinary.openUploadWidget({ cloud_name: 'demo', upload_preset: 'a5vxnzbp', tags: ['xmas'] },
+      function (error, result) {
+        console.log(result);
+      });
+  }
+
+
   render() {
     const style = {
       appBar: {
@@ -73,17 +82,17 @@ class Header extends React.Component {
               height="38"
               alt="React"
             />
-            <span className={s.brandTxt}>
+            {/* <span className={s.brandTxt}>
               <FormattedMessage {...messages.brand} />
-            </span>
+            </span> */}
           </Link>
           <LanguageSwitcher />
-          <div className={s.banner}>
+          {/* <div className={s.banner}>
             <h1 className={s.bannerTitle}>
               <FormattedMessage {...messages.bannerTitle} />
             </h1>
             <FormattedMessage tagName="p" {...messages.bannerDesc} />
-          </div>
+          </div> */}
         </div>
         <div style={style.iconsRightContainer}>
           <IconMenu
@@ -119,6 +128,14 @@ class Header extends React.Component {
               }
             />
           </IconMenu>
+        </div>
+        <div className="main">
+          <h1>Upload by quyetvv</h1>
+          <div className="upload">
+            <button onClick={this.uploadWidget.bind(this)} className="upload-button">
+              Add Image
+                    </button>
+          </div>
         </div>
       </div>
     );
