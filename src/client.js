@@ -70,6 +70,12 @@ const context = {
   fetch,
   // intl instance as it can be get with injectIntl
   intl: store.dispatch(getIntl()),
+
+  siteInfo: {
+    id: '',
+    name: '',
+    domain: window.location.origin
+  }
 };
 
 // Switch off the native scroll restoration behavior and handle it manually

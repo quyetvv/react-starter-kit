@@ -24,6 +24,7 @@ import pageLayout from './queries/pageLayout';
 import intl from './queries/intl';
 import adminsites from './queries/adminsite';
 import addSite from './queries/addsite';
+import siteInfo from './queries/siteInfo';
 
 const schema = new Schema({
   query: new ObjectType({
@@ -33,6 +34,7 @@ const schema = new Schema({
       news,
       intl,
       adminsites,
+      siteInfo,
       news_detail,
       pageLayout
     },

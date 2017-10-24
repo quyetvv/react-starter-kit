@@ -32,6 +32,7 @@ const ContextType = {
   client: PropTypes.object.isRequired,
   // ReactIntl
   intl: IntlProvider.childContextTypes.intl,
+  siteInfo: PropTypes.object.isRequired
 };
 
 /**
@@ -65,6 +66,12 @@ class App extends React.PureComponent {
   static childContextTypes = ContextType;
 
   getChildContext() {
+    const { siteInfo } = this.props.context;
+    //this.state = {siteInfo};
+    if (siteInfo) {
+      siteInfo.id = 1;
+    }
+
     return this.props.context;
   }
 

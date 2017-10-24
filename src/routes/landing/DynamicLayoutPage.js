@@ -24,6 +24,30 @@ export const pageLayoutQuery = gql`
   }
 `;
 
+const provideContext =
+    (childContextTypes, getChildContext) => (Component) => {
+        class ContextProvider extends React.Component {
+            static childContextTypes = childContextTypes;
+            getChildContext = () => getChildContext(this.props);
+
+            render() {
+                return <Component {...this.props} />;
+            }
+        }
+        return ContextProvider;
+    };
+
+const consumeContext = (contextTypes) => (Component) => {
+    /* The context is passed as props. This way the component is
+     completely decoupled from the context API.
+    */
+    const ContextConsumer = (props, context) =>
+        <Component {...props} {...context} />;
+    ContextConsumer.contextTypes = contextTypes;
+    return ContextConsumer;
+};
+
+
 export class PageBlock extends React.Component {
     getBlock(blockInfo) {
         switch (blockInfo.blockType) {

@@ -19,6 +19,7 @@ const AdminSiteType = new ObjectType({
   fields: {
     id: { type: new NonNull(ID) },
     name: { type: StringType },
+    domains: {type: StringType}
   },
 });
 
