@@ -20,6 +20,7 @@ import {
 import me from './queries/me';
 import news from './queries/news';
 import news_detail from './queries/news_detail';
+import pageLayout from './queries/pageLayout';
 import intl from './queries/intl';
 import adminsites from './queries/adminsite';
 import addSite from './queries/addsite';
@@ -32,7 +33,8 @@ const schema = new Schema({
       news,
       intl,
       adminsites,
-      news_detail
+      news_detail,
+      pageLayout
     },
   }),
   mutation: new ObjectType({
