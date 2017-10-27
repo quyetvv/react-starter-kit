@@ -102,7 +102,7 @@ class DynamicLayoutPage extends React.Component {
 
     render() {
         const { data: { loading, error, pageLayout } } = this.props;
-        console.log(pageLayout.content)
+        // console.log(pageLayout.content)
         const layout = {
             regions: [
                 {

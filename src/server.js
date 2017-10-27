@@ -121,14 +121,14 @@ app.get(
 //
 // Register API middleware
 // -----------------------------------------------------------------------------
-const graphqlMiddleware = expressGraphQL(req => ({
-  schema,
-  graphiql: __DEV__,
-  rootValue: { request: req },
-  pretty: __DEV__,
-}));
+// const graphqlMiddleware = expressGraphQL(req => ({
+//   schema,
+//   graphiql: __DEV__,
+//   rootValue: { request: req },
+//   pretty: __DEV__,
+// }));
 
-app.use('/graphql', graphqlMiddleware);
+// app.use('/graphql', graphqlMiddleware);
 
 //
 // Register server-side rendering middleware
@@ -199,6 +199,7 @@ app.get('*', async (req, res, next) => {
       client: apolloClient,
       // intl instance as it can be get with injectIntl
       intl,
+      siteInfo: {}
     };
 
     const route = await router.resolve({

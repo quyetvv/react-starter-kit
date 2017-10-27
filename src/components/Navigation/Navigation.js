@@ -62,6 +62,9 @@ class Navigation extends React.Component {
         <Link className={cx(s.link, s.highlight)} to="/register">
           <FormattedMessage {...messages.signup} />
         </Link>
+        <Link className={cx(s.link, s.highlight)} to="/landing">
+          landing
+        </Link>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import { validate, execute, specifiedRules } from 'graphql';
 
-import ApolloClient from 'apollo-client';
+import ApolloClient, { createNetworkInterface } from 'apollo-client';
 
 // Execute all GraphQL requests directly without
 class ServerInterface {
@@ -40,8 +40,15 @@ class ServerInterface {
 
 export default function createApolloClient(options) {
   return new ApolloClient({
+    networkInterface: createNetworkInterface({
+      uri: 'http://localhost:4001/graphql',
+      opts: {
+        // Additional fetch options like `credentials` or `headers`
+        credentials: 'include',
+      },
+    }),
     reduxRootSelector: state => state.apollo,
-    networkInterface: new ServerInterface(options),
+    //networkInterface: new ServerInterface(options),
     queryDeduplication: true,
   });
 }

@@ -28,7 +28,7 @@ import siteInfo from './queries/siteInfo';
 
 const schema = new Schema({
   query: new ObjectType({
-    name: 'QuerySuperDot',
+    name: 'QuerySuperDot2',
     fields: {
       me,
       news,

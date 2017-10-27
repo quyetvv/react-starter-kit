@@ -35,8 +35,9 @@ function createFetch(fetch: Fetch, { baseUrl, cookie }: Options) {
     },
   };
 
-  return (url: string, options: any) =>
-    url.startsWith('/graphql') || url.startsWith('/api')
+  return (url: string, options: any) => {
+    console.log(url);
+    return url.startsWith('/graphql') || url.startsWith('/api')
       ? fetch(`${baseUrl}${url}`, {
           ...defaults,
           ...options,
@@ -46,6 +47,7 @@ function createFetch(fetch: Fetch, { baseUrl, cookie }: Options) {
           },
         })
       : fetch(url, options);
+      }
 }
 
 export default createFetch;
