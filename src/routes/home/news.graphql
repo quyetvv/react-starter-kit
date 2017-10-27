@@ -1,8 +1,11 @@
-query HomeNews {
-  news {
+query QuerySuperDot {
+  postList {
     title
-    link
-    pubDate
-    content
+    state
+    author
+    content {
+      brief
+      extended
+    }
   }
 }

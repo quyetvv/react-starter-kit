@@ -31,12 +31,12 @@ const schema = new Schema({
     name: 'QuerySuperDot2',
     fields: {
       me,
-      news,
-      intl,
-      adminsites,
-      siteInfo,
-      news_detail,
-      pageLayout
+      // news,
+      // intl,
+      // adminsites,
+      // siteInfo,
+      // news_detail,
+      // pageLayout
     },
   }),
   mutation: new ObjectType({

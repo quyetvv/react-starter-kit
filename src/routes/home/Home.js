@@ -31,26 +31,31 @@ class Home extends React.Component {
   };
 
   render() {
-    const { data: { loading, news } } = this.props;
+    const { data: { loading, postList } } = this.props;
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <h1>React.js News</h1>
+          <h1>Test News</h1>
           <ChannelsListWithData />
           {loading
             ? 'Loading...'
-            : news.map(item => (
+            : postList.map(item => (
               <article key={item.link} className={s.newsItem}>
                 <h1 className={s.newsTitle}>
                   <a href={item.link}>{item.title}</a>
                 </h1>{' '}
                 <span className={s.publishedDate}>
-                  <FormattedRelative value={item.pubDate} />
+                  <FormattedRelative value={item.author} />
                 </span>
                 <div
                   className={s.newsDesc}
                   // eslint-disable-next-line react/no-danger
-                  dangerouslySetInnerHTML={{ __html: item.content }}
+                  dangerouslySetInnerHTML={{ __html: item.content.brief }}
+                />
+                <div
+                  className={s.newsDesc}
+                  // eslint-disable-next-line react/no-danger
+                  dangerouslySetInnerHTML={{ __html: item.content.extended }}
                 />
               </article>
             ))}
