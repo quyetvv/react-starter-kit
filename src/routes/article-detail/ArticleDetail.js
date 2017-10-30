@@ -16,43 +16,35 @@ import newsQuery from './news.graphql';
 import s from './ArticleDetail.css';
 import ChannelsListWithData from '../../components/Admin/shared/ChannelsListWithData';
 
-export const newsDetailQuery = gql`
-  query QuerySuperDot ($news_id: String!) {
-    news_detail(news_id: $news_id) {
-        title
-        link
-        pubDate
-        content
-    }
-  }
-`;
-
-
 class ArticleDetail extends React.Component {    
 
     render() {
-        const { data: { loading, error, news_detail },dataItem } = this.props;
-        const newsItem = news_detail;
+        const { data: { loading, error, postDetail },slug } = this.props;        
         return (
             <div className={s.root}>
                 <div className={s.container}>
-                    <h1>Article Detail: </h1>    
-                    <h2> Params: {dataItem.id}</h2>                
-                    {loading && newsItem
+                    <h1>Article Detail </h1>
+                    {/* <h2> Params: {slug}</h2>                 */}
+                    {loading && postDetail
                         ? 'Loading...'
                         : (
-                            <article key={newsItem.link} className={s.newsItem}>
+                            <article key={postDetail.link} className={s.postDetail}>
                                 <h1 className={s.newsTitle}>
-                                    <a href={newsItem.link}>{newsItem.title}</a>
+                                    <a href={postDetail.link}>{postDetail.title}</a>
                                 </h1>
                                 <span className={s.publishedDate}>
-                                    {/* <FormattedRelative value={newsItem.pubDate} /> */}
+                                    {/* <FormattedRelative value={postDetail.pubDate} /> */}
                                 </span>
                                 <div
-                                    className={s.newsDesc}
-                                    // eslint-disable-next-line react/no-danger
-                                    dangerouslySetInnerHTML={{ __html: newsItem.content }}
-                                />
+                                className={s.newsDesc}
+                                // eslint-disable-next-line react/no-danger
+                                dangerouslySetInnerHTML={{ __html: postDetail.content.brief }}
+                              />
+                              <div
+                                className={s.newsDesc}
+                                // eslint-disable-next-line react/no-danger
+                                dangerouslySetInnerHTML={{ __html: postDetail.content.extended }}
+                              />
                             </article>
                         )}
                 </div>
@@ -63,9 +55,9 @@ class ArticleDetail extends React.Component {
 
 
 
-export default compose(withStyles(s), graphql(newsDetailQuery, {
+export default compose(withStyles(s), graphql(newsQuery, {
   options: (ownProps) => ({
     variables: {
-      news_id: ownProps.dataItem.id // ownProps are the props that are added from the parent component
+        slug: ownProps.slug // ownProps are the props that are added from the parent component
     },
   })}))(ArticleDetail);

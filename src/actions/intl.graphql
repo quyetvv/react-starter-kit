@@ -1,5 +1,5 @@
-query intl ($locale:String!) {
-  intl (locale:$locale) {
+query intl ($locale:String!,$siteId: String!) {
+  intl (locale:$locale, siteId: $siteId ) {
     id
     message
   }

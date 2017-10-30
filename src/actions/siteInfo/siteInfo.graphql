@@ -1,0 +1,7 @@
+query siteInfo ($domain:String!) {
+  siteInfo (domain:$domain) {
+    id
+    name
+    domains
+  }
+}

@@ -12,20 +12,12 @@ import ArticleDetail from './ArticleDetail';
 import Layout from '../../components/Layout';
 
 async function action({ fetch,params }) {
-    const resp = await fetch('/graphql', {
-        body: JSON.stringify({
-            query: '{news{title,link,content}}',
-        }),
-    });
-    const { data } = await resp.json();    
-    if (!data || !data.news) throw new Error('Failed to load the news feed.');
-    data.id = params.id;
     return {
         chunks: ['article-detail'],
-        title: params.id,
+        title: params.slug,
         component: (
             <Layout>                
-                <ArticleDetail dataItem={data} />
+                <ArticleDetail slug={params.slug} />
             </Layout>
         ),
     };

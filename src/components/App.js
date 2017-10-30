@@ -69,7 +69,7 @@ class App extends React.PureComponent {
     const { siteInfo } = this.props.context;
     //this.state = {siteInfo};
     if (siteInfo) {
-      siteInfo.id = 1;
+      //siteInfo.id = 1;
     }
 
     return this.props.context;

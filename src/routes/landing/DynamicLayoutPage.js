@@ -19,7 +19,8 @@ import AddChannel from '../../components/Admin/shared/AddChannel';
 export const pageLayoutQuery = gql`
   query QuerySuperDot ($pageType: String!) {
     pageLayout(pageType: $pageType) {
-        content
+        content,
+        css
     }
   }
 `;
@@ -103,32 +104,10 @@ class DynamicLayoutPage extends React.Component {
     render() {
         const { data: { loading, error, pageLayout } } = this.props;
         // console.log(pageLayout.content)
-        const layout = {
-            regions: [
-                {
-                    type: 'Header',
-                    css: 'customer-header',
-                    blocks: [
-                        {
-                            blockType: 'ChannelList',
-                            id: 1,
-                            data: ''
-                        },
-                        {
-                            blockType: 'LeftMenu',
-                            id: 2,
-                            data: ''
-                        },
-                        {
-                            blockType: 'LanguageSwicher',
-                            id: '3',
-                            data: ''
-                        }
-                    ]
-                }
-            ]
-        }
-        // const layout = pageLayout.content
+        const layout = pageLayout? eval("(" + pageLayout.content + ")") : {};
+        var cssString = pageLayout? pageLayout.css : '({})';
+        cssString = cssString.startsWith("({")? cssString : "({" + cssString + "})";
+        var customCssClasses = eval(cssString);   
         return (
             <div className={s.root}>
                 <div className={s.container}>
@@ -136,9 +115,9 @@ class DynamicLayoutPage extends React.Component {
                     {loading
                         ? 'Loading...'
                         : (
-                            <div>
+                            <div style={customCssClasses.region}>
                                 <div>{layout.regions.length}</div>
-                                <PageRegionList regions={layout.regions} />
+                                <PageRegionList key={layout.regions.id} regions={layout.regions} />
                             </div>
                         )}
                 </div>

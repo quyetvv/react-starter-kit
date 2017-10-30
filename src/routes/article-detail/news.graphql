@@ -1,8 +1,11 @@
-query HomeNews {
-  news {
+query postDetail ($slug: String!) {
+  postDetail (slug: $slug) {
     title
-    link
-    pubDate
-    content
+    state
+    author
+    content {
+      brief
+      extended
+    }
   }
 }

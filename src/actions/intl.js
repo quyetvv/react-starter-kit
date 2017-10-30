@@ -27,7 +27,8 @@ export function getIntl() {
   return (dispatch, getState) => getIntlFromState(getState());
 }
 
-export function setLocale({ locale }) {
+export function setLocale({ locale,siteInfo }) {
+  const siteId = siteInfo.id;
   return async (dispatch, getState, { client, history }) => {
     dispatch({
       type: SET_LOCALE_START,
@@ -40,9 +41,9 @@ export function setLocale({ locale }) {
       // WARNING !!
       // do not use client.networkInterface except you want skip Apollo store
       // use client.query if you want benefit from Apollo caching mechanisms
-      const { data } = await client.networkInterface.query({
+      const { data } = await client.query({
         query: queryIntl,
-        variables: { locale },
+        variables: { locale, siteId },
       });
       const messages = data.intl.reduce((msgs, msg) => {
         msgs[msg.id] = msg.message; // eslint-disable-line no-param-reassign

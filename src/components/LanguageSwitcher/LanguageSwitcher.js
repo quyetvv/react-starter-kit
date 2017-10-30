@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setLocale } from '../../actions/intl';
 
-function LanguageSwitcher({ currentLocale, availableLocales, setLocale }) {
+function LanguageSwitcher({ currentLocale, availableLocales, setLocale, siteInfo }) {
   const isSelected = locale => locale === currentLocale;
   const localeDict = {
     /* @intl-code-template '${lang}-${COUNTRY}': '${Name}', */
@@ -27,7 +27,7 @@ function LanguageSwitcher({ currentLocale, availableLocales, setLocale }) {
               <a
                 href={`?lang=${locale}`}
                 onClick={e => {
-                  setLocale({ locale });
+                  setLocale({ locale,siteInfo });
                   e.preventDefault();
                 }}
               >
@@ -48,6 +48,7 @@ LanguageSwitcher.propTypes = {
 const mapState = state => ({
   availableLocales: state.runtime.availableLocales,
   currentLocale: state.intl.locale,
+  siteInfo : state.siteInfo
 });
 
 const mapDispatch = {

@@ -22,11 +22,12 @@ import cs from 'react-intl/locale-data/cs';
 import App from './components/App';
 import createFetch from './createFetch';
 import configureStore from './store/configureStore';
-import { updateMeta } from './DOMUtils';
+import { updateMeta,updateTag } from './DOMUtils';
 import history from './history';
 import createApolloClient from './core/createApolloClient';
 import router from './router';
 import { getIntl } from './actions/intl';
+import { getSiteInfo } from './actions/siteInfo/siteInfo';
 
 const apolloClient = createApolloClient();
 
@@ -50,6 +51,10 @@ const store = configureStore(window.App.state, {
   history,
 });
 
+const siteInfo = {  
+  domain: window.location.origin
+}
+
 // Global (context) variables that can be easily accessed from any React component
 // https://facebook.github.io/react/docs/context.html
 const context = {
@@ -71,11 +76,7 @@ const context = {
   // intl instance as it can be get with injectIntl
   intl: store.dispatch(getIntl()),
 
-  siteInfo: {
-    id: '',
-    name: '',
-    domain: window.location.origin
-  }
+  siteInfo: store.dispatch(getSiteInfo(siteInfo))
 };
 
 // Switch off the native scroll restoration behavior and handle it manually
@@ -89,9 +90,9 @@ let onRenderComplete = function initialRenderComplete() {
   const elem = document.getElementById('css');
   if (elem) elem.parentNode.removeChild(elem);
   onRenderComplete = function renderComplete(route, location) {
-    document.title = route.title;
+    document.title = siteInfo && siteInfo.name? siteInfo.name : route.title;
 
-    updateMeta('description', route.description);
+    updateMeta('description', route.description);    
     // Update necessary tags in <head> at runtime here, ie:
     // updateMeta('keywords', route.keywords);
     // updateCustomMeta('og:url', route.canonicalUrl);

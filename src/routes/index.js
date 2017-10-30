@@ -24,7 +24,7 @@ const routes = {
       load: () => import(/* webpackChunkName: 'landing' */ './landing'),
     },
     {
-      path: '/article/:id',
+      path: '/article/:slug',
       load: (params) => import(/* webpackChunkName: 'article-detail' */ './article-detail'),
     },
     {
@@ -64,7 +64,7 @@ const routes = {
     const route = await next();
 
     // Provide default values for title, description etc.
-    route.title = `${route.title || 'Untitled Page'} - www.reactstarterkit.com`;
+    route.title = `${route.title || 'Untitled Page'}`;
     route.description = route.description || '';
 
     return route;

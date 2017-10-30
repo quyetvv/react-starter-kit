@@ -38,6 +38,7 @@ import assets from './assets.json'; // eslint-disable-line import/no-unresolved
 import configureStore from './store/configureStore';
 import { setRuntimeVariable } from './actions/runtime';
 import { setLocale } from './actions/intl';
+import { setSiteInfo } from './actions/siteInfo/siteInfo';
 import config from './config';
 
 const app = express();
@@ -173,10 +174,18 @@ app.get('*', async (req, res, next) => {
       }),
     );
 
+    console.log(" request from host: " +req.headers.host)
+    const siteInfo = await store.dispatch(
+      setSiteInfo({
+        siteUrl: req.headers.host
+      }),
+    );
+
     const locale = req.language;
     const intl = await store.dispatch(
       setLocale({
         locale,
+        siteInfo
       }),
     );
 
@@ -199,7 +208,7 @@ app.get('*', async (req, res, next) => {
       client: apolloClient,
       // intl instance as it can be get with injectIntl
       intl,
-      siteInfo: {}
+      siteInfo
     };
 
     const route = await router.resolve({
